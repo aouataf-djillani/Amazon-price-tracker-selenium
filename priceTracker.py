@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import smtplib
 import local_settings
-
+from selenium.webdriver.chrome.options import Options
 # Sends an email alert once the product reaches the desired price
 def alert_me(url,name, priceWanted):
     
@@ -25,11 +25,15 @@ def alert_me(url,name, priceWanted):
 # parses the html page
 # compares the price with the desired price
 def trackPrice(url,priceWanted):
-    driver = webdriver.Chrome('/home/aouataf/Documents/chromedriver')
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("window-size=1400,1500")
+    	
+    driver = webdriver.Chrome(options=options)
     
     driver.get(url)
     try:
-        name = driver.find_element_by_id('title').text
+        name = driver.find_element(By.ID, 'title').text
         
         price = float(driver.find_element(By.XPATH, '//*[@class="a-price a-text-price a-size-medium apexPriceToPay"]').text[1:].replace(",",""))
         
@@ -43,7 +47,7 @@ def trackPrice(url,priceWanted):
 url="https://www.amazon.com/Acer-Predator-PH315-54-760S-i7-11800H-Keyboard/dp/B092YHJLS6/ref=sr_1_6?crid=F1JXNBNMFGGU&keywords=gamer+laptop&qid=1649613915&s=computers-intl-ship&sprefix=gamer+laptop+%2Ccomputers-intl-ship%2C176&sr=1-6"
 print(trackPrice(url, 12999.0))
 
-# to do :Run the program on AWS cloud
-# cron(08**?*) every day at 8 am 
+# Schedule runnig every day at 8 am 
+# cron(0 8 * * ? *) 
 
 
