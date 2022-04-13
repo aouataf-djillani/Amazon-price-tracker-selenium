@@ -1,5 +1,7 @@
-# Amazon_Price_Tracker
+# Amazon Price Tracker using Python, Selenium and AWS EC2  
  This automated Price Tracker for amazon product is built using Python. It allows Tracking price changes and sending email alerts once the desired price is reached 
+ ![priceTracker](https://user-images.githubusercontent.com/54501663/163172724-473bb607-6654-4ea2-a630-6d5be4cd3a4b.png)
+
 ## Steps 
 - getting the link from Amazon website and locating elements: product name and price
 - Fetching the element using selenium syntax  [See documentation](https://selenium-python.readthedocs.io/locating-elements.html)
